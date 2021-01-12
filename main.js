@@ -14,6 +14,9 @@ for(let i=1 ; i < 50 ; i++){
     ANIMALS.push('fcow'+i)
 }
 for(let i=1 ; i < 50 ; i++){
+    ANIMALS.push('fcdog'+i)
+}
+for(let i=1 ; i < 50 ; i++){
     ANIMALS.push('flama'+i)
 }
 for(let i=1 ; i < 50 ; i++){
@@ -97,6 +100,11 @@ var models = {
     cow: {
         obj:"models/Cow/Cow.obj",
         mtl:"models/Cow/Cow.mtl",
+        mesh:null
+    },
+    cdog: {
+        obj:"models/wolf/Wolf_One_obj.obj",
+        mtl:"models/wolf/Wolf_One_obj.mtl",
         mesh:null
     },
     lama: {
@@ -434,6 +442,15 @@ function onResourcesLoaded(){
         meshes["fcow"+i].scale.set(0.4,0.4,0.4);
         meshes["fcow"+i].castShadow = true;
         scene.add(meshes["fcow"+i]);
+
+        var xx = randomRange(max,min,cluster);
+        random1 = xx[0];
+        random2 = xx[1];
+        meshes["fcdog"+i] = models.cdog.mesh.clone();
+        meshes["fcdog"+i].position.set(random1,0,random2);
+        meshes["fcdog"+i].scale.set(0.4,0.4,0.4);
+        meshes["fcdog"+i].castShadow = true;
+        scene.add(meshes["fcdog"+i]);
 
         var xx = randomRange(max,min,cluster);
         random1 = xx[0];
