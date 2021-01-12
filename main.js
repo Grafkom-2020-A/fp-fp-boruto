@@ -7,7 +7,7 @@ var GRAVITY = 0.1;
 var fogcase = true
 var s0 = 0;
 var s1 = 0;
-var timeSpeed = 0.00005;
+var timeSpeed = 0.0000000005;
 var flashLightOn = 0;
 var ANIMALS = [];
 for(let i=1 ; i < 50 ; i++){
@@ -138,7 +138,7 @@ var meshes = { };
 function init(){
 
     scene = new THREE.Scene( );
-    camera = new THREE.PerspectiveCamera(90, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(90, window.innerWidth/window.innerHeight, 0.05, 1000);
     var listener = new THREE.AudioListener();
     camera.add( listener );
     camera.rotation.order = "YXZ";
