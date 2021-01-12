@@ -26,7 +26,7 @@ var keyboard = {};
 var player = {
     x:0,
     z:-5,
-    height:0.001,
+    height:0.1,
     speed:0.2,
     throwspeed:0.7,
     turnSpeed:Math.PI*0.003 
@@ -103,8 +103,8 @@ var models = {
         mesh:null
     },
     cdog: {
-        obj:"models/wolf/Wolf_One_obj.obj",
-        mtl:"models/wolf/Wolf_One_obj.mtl",
+        obj:"models/Cow/Cow.obj",
+        mtl:"models/Cow/Cow.mtl",
         mesh:null
     },
     lama: {
