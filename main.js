@@ -733,46 +733,7 @@ var update = () => {
             throwing['rock'] = 0
         }
     }
-    ///////
-    ////
-    ///////////////
-    // if(binded['axe']){
-    //     console.log('girdi');
-    //     objinteract(meshes["axe"],0)
-    // }
-    // if(checkCollision(player1,meshes["axe"],1.8)){
-    //     if(binded['axe'] !== 1)
-    //         document.getElementById('info2').innerHTML =  "Press E to pick item";
-    //     else
-    //     document.getElementById('info2').innerHTML =  "";
-    //     if(keyboard[69]){
-    //         binded['axe'] = 1
-    //     }
-    // } else {
-    //     document.getElementById('info2').innerHTML =  ""
-    // }
-    // if(binded['axe'] === 1){
-    //     bindd(player1,meshes["axe"],[0,0,3]);
-    //     document.getElementById('info3').innerHTML = "Press T to drop item"
-    // } else{
-    //     fall(meshes["axe"],GRAVITY1)
-    // }
-    // if(keyboard[84]){
-    //     binded['axe'] = 0;
-    //     document.getElementById('info3').innerHTMLaxe
 
-    // }
-    // if(keyboard[82] && binded['axe'] === 1){
-    //     binded['axe'] = 0;
-    //     throwing['axe'] = 1;
-    //     meshes["axe"].position.y += 0.5
-    // }
-    // if(throwing['axe']==1){
-    //     throwera(meshes["axe"],power+0.8);
-    //     if(meshes["axe"].position.y < 0.1){
-    //         throwing['axe'] = 0
-    //     }
-    // }
     ANIMALS.map((elem,index)=>{
 
         if(alive[elem] === 0  && checkCollision(player1,meshes[elem],1.8) && food[elem]){
