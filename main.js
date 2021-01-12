@@ -103,8 +103,8 @@ var models = {
         mesh:null
     },
     cdog: {
-        obj:"models/Cow/Cow.obj",
-        mtl:"models/Cow/Cow.mtl",
+        obj:"models/poly_goat/goat.obj",
+        mtl:"models/poly_goat/goat.mtl",
         mesh:null
     },
     lama: {
@@ -447,7 +447,8 @@ function onResourcesLoaded(){
         random1 = xx[0];
         random2 = xx[1];
         meshes["fcdog"+i] = models.cdog.mesh.clone();
-        meshes["fcdog"+i].position.set(random1,0,random2);
+        meshes["fcdog"+i].position.set(random1,1,random2);
+        meshes["fcdog"+i].rotation.set(0,Math.PI,0);
         meshes["fcdog"+i].scale.set(0.4,0.4,0.4);
         meshes["fcdog"+i].castShadow = true;
         scene.add(meshes["fcdog"+i]);
