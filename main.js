@@ -14,7 +14,10 @@ for(let i=1 ; i < 50 ; i++){
     ANIMALS.push('fcow'+i)
 }
 for(let i=1 ; i < 50 ; i++){
-    ANIMALS.push('fcdog'+i)
+    ANIMALS.push('moose'+i)
+}
+for(let i=1 ; i < 50 ; i++){
+    ANIMALS.push('fgoat'+i)
 }
 for(let i=1 ; i < 50 ; i++){
     ANIMALS.push('flama'+i)
@@ -102,9 +105,14 @@ var models = {
         mtl:"models/Cow/Cow.mtl",
         mesh:null
     },
-    cdog: {
-        obj:"models/poly_goat/goat.obj",
-        mtl:"models/poly_goat/goat.mtl",
+    moose: {
+        obj:"models/moose/Moose.obj",
+        mtl:"models/moose/Moose.mtl",
+        mesh:null
+    },
+    goat: {
+        obj:"models/poly_goat/Goat.obj",
+        mtl:"models/poly_goat/Goat.mtl",
         mesh:null
     },
     lama: {
@@ -446,12 +454,20 @@ function onResourcesLoaded(){
         var xx = randomRange(max,min,cluster);
         random1 = xx[0];
         random2 = xx[1];
-        meshes["fcdog"+i] = models.cdog.mesh.clone();
-        meshes["fcdog"+i].position.set(random1,1,random2);
-        meshes["fcdog"+i].rotation.set(0,Math.PI,0);
-        meshes["fcdog"+i].scale.set(0.4,0.4,0.4);
-        meshes["fcdog"+i].castShadow = true;
-        scene.add(meshes["fcdog"+i]);
+        meshes["moose"+i] = models.moose.mesh.clone();
+        meshes["moose"+i].position.set(random1,1,random2);
+        meshes["moose"+i].scale.set(0.4,0.4,0.4);
+        meshes["moose"+i].castShadow = true;
+        scene.add(meshes["moose"+i]);
+
+        var xx = randomRange(max,min,cluster);
+        random1 = xx[0];
+        random2 = xx[1];
+        meshes["fgoat"+i] = models.goat.mesh.clone();
+        meshes["fgoat"+i].position.set(random1,1,random2);
+        meshes["fgoat"+i].scale.set(0.4,0.4,0.4);
+        meshes["fgoat"+i].castShadow = true;
+        scene.add(meshes["fgoat"+i]);
 
         var xx = randomRange(max,min,cluster);
         random1 = xx[0];
