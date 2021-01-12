@@ -158,7 +158,7 @@ function init(){
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
     floorTexture.repeat.set( 400, 600 );
     var floorMaterial = new THREE.MeshLambertMaterial( { map: floorTexture, side: THREE.DoubleSide } );
-    var floorGeometry = new THREE.PlaneGeometry(500, 500, 20, 20);
+    var floorGeometry = new THREE.PlaneBufferGeometry(500, 500, 20, 20);
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.rotation.x = Math.PI / 2;
 
@@ -494,11 +494,15 @@ ANIMALS.map((elem,index)=>{
     alive[elem] =1
 });
 
+console.log(ANIMALS)
+console.log(flag)
+console.log(alive)
 var checkCollision = (obj1,obj2,dist) =>{
     return Math.abs(obj1.position.x - obj2.position.x) < dist &&
-       Math.abs(obj1.position.y - obj2.position.y) < dist+10 && 
+       Math.abs(obj1.position.y - obj2.position.y) < dist+10 && //DIKKAT
        Math.abs(obj1.position.z - obj2.position.z) < dist
 };
+
 
 var randomMovement = (obj1,meshName,initPos,speed)=>{
     if(flag[meshName] === 1){
@@ -611,6 +615,164 @@ var interract = (obj1,opt1)=>{
         }
     }
 
+}
+var bindd = (obj1,obj2,margin)=>{
+    obj2.position.x = obj1.position.x + margin[0];
+    obj2.position.y = obj1.position.y + margin[1];
+    obj2.rotation.y = obj1.rotation.y;
+    obj2.position.z = obj1.position.z + margin[2]
+}
+
+var bindz = (obj1,obj2,margin)=>{
+    obj2.position.x = obj1.position.x + Math.sin(obj1.rotation.y + Math.PI/4) * 0.6;
+    obj2.position.y = player.height+0.8;
+    obj2.position.z = obj1.position.z + Math.cos(obj1.rotation.y + Math.PI/4) * 0.6;
+    obj2.rotation.z = obj1.rotation.y;
+    obj2.rotation.x = obj1.rotation.z - Math.PI/2;
+}
+var fall = (obj1,GRAVITY1)=>{
+    if(obj1.position.y > 0.1){
+        obj1.position.y -= GRAVITY1
+    }
+}
+var thrower = (obj1,power)=>{
+    obj1.position.x -= Math.sin(obj1.rotation.z) * power;
+    obj1.position.z -= Math.cos(obj1.rotation.z) * power;
+}
+var throwera = (obj1,power)=>{
+    obj1.position.z -= Math.cos(obj1.rotation.y) * power;
+    obj1.position.x -= Math.sin(obj1.rotation.y) * power;
+}
+binded = {}
+throwing = {}
+food = {}
+ANIMALS.map((elem,index)=>{
+    food[elem] =1
+})
+var enemyhit = 0
+var update = () => {
+    // bindd(camera,flameLight,[0,2,0])
+    var gg = parseInt(document.getElementById('bar1').value)
+    GRAVITY1 = (GRAVITY+gg/70)
+    var gg = parseInt(document.getElementById('bar2').value)
+    power = (player.throwspeed+gg/5)
+    var gg = parseInt(document.getElementById('bar3').value)
+    timeSpeedNorm = (timeSpeed+gg/500),
+    HUNGRY -= 0.01
+    document.getElementById('health').innerHTML =  "hungry: "+100+"/"+Math.floor(HUNGRY);
+    interract(camera,0)
+    bindd(camera,player1,[0,-1,0])
+    
+    posVal = Math.round(player1.position.x) + " " + Math.round(player1.position.y) + " " + Math.round(player1.position.z);
+    document.getElementById('info').innerHTML =  "position: "+posVal;
+    if(checkCollision(player1,jarid,1.8)){
+        if(binded['jarid'] !== 1)
+            document.getElementById('info2').innerHTML =  "Press E to pick item";
+        else
+        document.getElementById('info2').innerHTML =  "";
+        if(keyboard[69]){
+            binded['jarid'] = 1
+        }
+    } else {
+        document.getElementById('info2').innerHTML =  ""
+    }
+    if(binded['jarid'] === 1){
+
+        bindz(player1,jarid,[0,0,0]);
+        document.getElementById('info3').innerHTML = "Press T to drop item"
+    } else{
+        fall(jarid,GRAVITY1)
+    }
+    if(keyboard[84]){
+        binded['jarid'] = 0;
+        document.getElementById('info3').innerHTML = ""
+    }
+    if(keyboard[82] && binded['jarid'] === 1){
+        binded['jarid'] = 0;
+        throwing['jarid'] = 1;
+        jarid.position.y += 0.5
+    }
+    if(throwing['jarid']===1){
+        thrower(jarid,power);
+        if(jarid.position.y < 0.1){
+            throwing['jarid'] = 0
+        }
+    }
+
+    if(checkCollision(player1,meshes['rock'],1.8)){
+        if(binded['rock'] !== 1)
+            document.getElementById('info2').innerHTML =  "Press E to pick item";
+        else
+        document.getElementById('info2').innerHTML =  "";
+        if(keyboard[69]){
+            binded['rock'] = 1
+        }
+    } else {
+        document.getElementById('info2').innerHTML =  ""
+    }
+    if(binded['rock'] === 1){
+
+        bindd(player1,meshes['rock'],[0,0,3]);
+        document.getElementById('info3').innerHTML = "Press T to drop item"
+    } else{
+        fall(meshes['rock'],GRAVITY1)
+    }
+    fall(meshes["rock"],GRAVITY1)
+    if(keyboard[84]){
+        binded['rock'] = 0;
+        document.getElementById('info3').innerHTML = ""
+    }
+    if(keyboard[82] && binded['rock'] === 1){
+        binded['rock'] = 0;
+        throwing['rock'] = 1;
+        meshes['rock'].position.y += 0.5
+    }
+    if(throwing['rock']===1){
+        throwera(meshes['rock'],power+0.8);
+        if(meshes['rock'].position.y < 0.1){
+            throwing['rock'] = 0
+        }
+    }
+    ///////
+    ////
+    ///////////////
+    // if(binded['axe']){
+    //     console.log('girdi');
+    //     objinteract(meshes["axe"],0)
+    // }
+    // if(checkCollision(player1,meshes["axe"],1.8)){
+    //     if(binded['axe'] !== 1)
+    //         document.getElementById('info2').innerHTML =  "Press E to pick item";
+    //     else
+    //     document.getElementById('info2').innerHTML =  "";
+    //     if(keyboard[69]){
+    //         binded['axe'] = 1
+    //     }
+    // } else {
+    //     document.getElementById('info2').innerHTML =  ""
+    // }
+    // if(binded['axe'] === 1){
+    //     bindd(player1,meshes["axe"],[0,0,3]);
+    //     document.getElementById('info3').innerHTML = "Press T to drop item"
+    // } else{
+    //     fall(meshes["axe"],GRAVITY1)
+    // }
+    // if(keyboard[84]){
+    //     binded['axe'] = 0;
+    //     document.getElementById('info3').innerHTMLaxe
+
+    // }
+    // if(keyboard[82] && binded['axe'] === 1){
+    //     binded['axe'] = 0;
+    //     throwing['axe'] = 1;
+    //     meshes["axe"].position.y += 0.5
+    // }
+    // if(throwing['axe']==1){
+    //     throwera(meshes["axe"],power+0.8);
+    //     if(meshes["axe"].position.y < 0.1){
+    //         throwing['axe'] = 0
+    //     }
+    // }
     ANIMALS.map((elem,index)=>{
 
         if(alive[elem] === 0  && checkCollision(player1,meshes[elem],1.8) && food[elem]){
@@ -625,14 +787,21 @@ var interract = (obj1,opt1)=>{
             document.getElementById('info5').innerHTML = ""
     
         }
-        if(checkCollision(jarid,meshes[elem],1) && (throwing['jarid'] || binded['jarid'])){
-     
-            meshes[elem].rotation.z = Math.PI /2;
-            alive[elem] = 0
-        }
         if(alive[elem]===1)
             randomMovement(meshes[elem],elem,meshes[elem].position.z,0.12)
     });
+
+    if(Math.floor(player1.position.x) < 4 && Math.floor(player1.position.x) > 0 &&
+        Math.floor(player1.position.z) < -9 && Math.floor(player1.position.z) > -13)
+    {
+        document.getElementById('info6').innerHTML = "Press E to enter house";
+        if(keyboard[69]){
+            camera.position.set(0, -30+player.height, 10);
+        }
+    }
+    else{
+        document.getElementById('info6').innerHTML = "";
+    }
 
     // jarid.rotation.z += 0.1
     // camera.rotation.y += 0.1
