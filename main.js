@@ -23,10 +23,10 @@ var keyboard = {};
 var player = {
     x:0,
     z:-5,
-    height:1.8,
-    speed:0.45,
+    height:0.001,
+    speed:0.2,
     throwspeed:0.7,
-    turnSpeed:Math.PI*0.005 
+    turnSpeed:Math.PI*0.003 
     };
 
 var loadingScreen = {
@@ -307,7 +307,7 @@ function init(){
             })
         })(_key);
     }
-    camera.position.set(player.x,player.height+0.9,player.z);
+    camera.position.set(player.x,player.height+0.1,player.z);
     camera.lookAt(new THREE.Vector3(0, player.height, 0));
   
     renderer = new THREE.WebGLRenderer();
