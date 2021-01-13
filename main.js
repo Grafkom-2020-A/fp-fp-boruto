@@ -541,11 +541,7 @@ function onResourcesLoaded(){
     targetObject = new THREE.Object3D();
     scene.add(targetObject);
     var geometry = new THREE.CylinderGeometry( 0.05, 0.05, 2, 32 );
-    var material = new THREE.MeshBasicMaterial( {color: 0x964B00} );
-    // jarid = new THREE.Mesh( geometry, material );
-    // scene.add( jarid );
-    // jarid.position.set(player.x-0.3,player.height+0.8,player.z);
-    // jarid.rotation.x = Math.PI / 2
+    var material = new THREE.MeshBasicMaterial( {color: 0x964B00} );=
     
     var geometry = new THREE.CylinderGeometry( 0.05, 0.05,3, 32 );
     var material = new THREE.MeshBasicMaterial( {color: 0x4d3700} );
@@ -839,46 +835,68 @@ var update = () => {
     // camera.rotation.y += 0.1
   
     //sun
-
-    daytime += 1 * timeSpeedNorm/2;
-    light.position.x = Math.sin(daytime * 0.7 ) * 30;
-    light.position.y = Math.cos(daytime * 0.5 ) * 40;
-    light.position.z = Math.cos(daytime * 0.3 ) * 30;
-
-    if(light.position.y < 0){
+if(light.position.y < 0){
        
     }
     if(daytime >= 3.13 && daytime < 10.26){
         light.castShadow = false
-        if(fogcase)
-            scene.fog = new THREE.Fog( 0x111624, 50, 150 );
-        else
-            scene.fog = new THREE.Fog( 0x111624, 150, 200 );
+        if(daytime >= 3.13 && daytime < 10.36){
+            
+             scene.fog = new THREE.FogExp2( 0xea6f1c,0.015 - (daytime/3.13 - 1)/100);
+             
+             scene.fog = new THREE.FogExp2( 0x111624,(daytime/3.13 - 1)/20);
+             console.log((daytime/3.13 - 1)/20);
+        }
+       
         flameLight.intensity = 2.0
         flameLight.castShadow = true
 
         light.intensity = 0.0
-        // console.log("gece "+daytime)
+        console.log("nightTime: "+daytime)
         s0 = 1
         s1 = 0
-    } else {
+    } 
+  else {
         s1 = 1
         if(s0 && s1){
             daytime = 0;
         }
         s0 = 0
         light.castShadow = true
-        if(fogcase)
-            scene.fog = new THREE.Fog( 0xbae5ff, 50, 150 );
-        else
-            scene.fog = new THREE.Fog( 0xbae5ff, 150, 1600);
-        light.intensity = 0.7
+        light.intensity = 0.7;
         flameLight.intensity = 0.0
+        if(daytime >= 0 && daytime < 1.5){
+            light.intensity = 0;
+            if((10.25/3.13 -1)/20 - daytime/10 > 0.02){
+                console.log((10.25/3.13 -1)/20 - daytime/10);
+                scene.fog = new THREE.FogExp2( 0x111624, (10.25/3.13 -1)/20 - daytime/10);
+            }
+            else{
+                 scene.fog = new THREE.FogExp2( 0xbae5ff , (daytime/2 - 0.53) * 0.183);
+                 light.intensity = (daytime/2-0.5)*3 - 0.4;
+                console.log("Light = "+light.intensity);
+                console.log("FOG = ",daytime/2 - 0.53);
+             }
+        }
+        else if(daytime >= 1.5 && daytime < 2.7){
+            if(0.2- 0.1*daytime > 0)
+                scene.fog = new THREE.FogExp2( 0xbae5ff, 0.2- 0.1*daytime);
+            else
+                scene.fog = new THREE.FogExp2( 0xbae5ff, 0);
+                
+        }
+        else if(daytime >= 2.7 && daytime < 3.13){
+             scene.fog = new THREE.FogExp2( 0xea6f1c,(daytime/2.7 - 1)/100);
+             console.log( (daytime/2.7-1)/100);
+            }
+            
+            
 
         flameLight.castShadow = false
-        // console.log("DayTime: "+daytime)
+        console.log("DayTime: "+daytime)
 
     }
+    
     
     if(moving === 1){
         var time = Date.now() * 0.01;
