@@ -352,7 +352,7 @@ function init(){
 }
 
 var targetObject;
-var jarid;
+// var jarid;
 var fireStick;
 
 function onResourcesLoaded(){   
@@ -542,10 +542,10 @@ function onResourcesLoaded(){
     scene.add(targetObject);
     var geometry = new THREE.CylinderGeometry( 0.05, 0.05, 2, 32 );
     var material = new THREE.MeshBasicMaterial( {color: 0x964B00} );
-    jarid = new THREE.Mesh( geometry, material );
-    scene.add( jarid );
-    jarid.position.set(player.x-0.3,player.height+0.8,player.z);
-    jarid.rotation.x = Math.PI / 2
+    // jarid = new THREE.Mesh( geometry, material );
+    // scene.add( jarid );
+    // jarid.position.set(player.x-0.3,player.height+0.8,player.z);
+    // jarid.rotation.x = Math.PI / 2
     
     var geometry = new THREE.CylinderGeometry( 0.05, 0.05,3, 32 );
     var material = new THREE.MeshBasicMaterial( {color: 0x4d3700} );
@@ -736,39 +736,39 @@ var update = () => {
     
     posVal = Math.round(player1.position.x) + " " + Math.round(player1.position.y) + " " + Math.round(player1.position.z);
     document.getElementById('info').innerHTML =  "position: "+posVal;
-    if(checkCollision(player1,jarid,1.8)){
-        if(binded['jarid'] !== 1)
-            document.getElementById('info2').innerHTML =  "Press E to pick item";
-        else
-        document.getElementById('info2').innerHTML =  "";
-        if(keyboard[69]){
-            binded['jarid'] = 1
-        }
-    } else {
-        document.getElementById('info2').innerHTML =  ""
-    }
-    if(binded['jarid'] === 1){
+    // if(checkCollision(player1,jarid,1.8)){
+    //     if(binded['jarid'] !== 1)
+    //         document.getElementById('info2').innerHTML =  "Press E to pick item";
+    //     else
+    //     document.getElementById('info2').innerHTML =  "";
+    //     if(keyboard[69]){
+    //         binded['jarid'] = 1
+    //     }
+    // } else {
+    //     document.getElementById('info2').innerHTML =  ""
+    // }
+    // if(binded['jarid'] === 1){
 
-        bindz(player1,jarid,[0,0,0]);
-        document.getElementById('info3').innerHTML = "Press T to drop item"
-    } else{
-        fall(jarid,GRAVITY1)
-    }
-    if(keyboard[84]){
-        binded['jarid'] = 0;
-        document.getElementById('info3').innerHTML = ""
-    }
-    if(keyboard[82] && binded['jarid'] === 1){
-        binded['jarid'] = 0;
-        throwing['jarid'] = 1;
-        jarid.position.y += 0.5
-    }
-    if(throwing['jarid']===1){
-        thrower(jarid,power);
-        if(jarid.position.y < 0.1){
-            throwing['jarid'] = 0
-        }
-    }
+    //     bindz(player1,jarid,[0,0,0]);
+    //     document.getElementById('info3').innerHTML = "Press T to drop item"
+    // } else{
+    //     fall(jarid,GRAVITY1)
+    // }
+    // if(keyboard[84]){
+    //     binded['jarid'] = 0;
+    //     document.getElementById('info3').innerHTML = ""
+    // }
+    // if(keyboard[82] && binded['jarid'] === 1){
+    //     binded['jarid'] = 0;
+    //     throwing['jarid'] = 1;
+    //     jarid.position.y += 0.5
+    // }
+    // if(throwing['jarid']===1){
+    //     thrower(jarid,power);
+    //     if(jarid.position.y < 0.1){
+    //         throwing['jarid'] = 0
+    //     }
+    // }
 
     // if(checkCollision(player1,meshes['rock'],1.8)){
     //     if(binded['rock'] !== 1)
