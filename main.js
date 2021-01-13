@@ -69,6 +69,12 @@ var models = {
         mtl:"models/ModularTerrainHilly/Prop_Tree_Pine_3.mtl",
         mesh:null
     }, 
+
+    tree4: {
+        obj:"models/ModularTerrainHilly/Prop_Tree_Pine_3.obj",
+        mtl:"models/ModularTerrainHilly/Prop_Tree_Pine_3.mtl",
+        mesh:null
+    }, 
    
     bush: {
         obj:"models/ModularTerrainHilly/Prop_Bush_1.obj",
@@ -362,6 +368,7 @@ function onResourcesLoaded(){
         meshes["xtree"+i] = models.tree.mesh.clone();
         meshes["ytree"+i] = models.tree2.mesh.clone();
         meshes["ztree"+i] = models.tree3.mesh.clone();
+        meshes["xtree2"+i] = models.tree4.mesh.clone();
         meshes["xbush"+i] = models.bush.mesh.clone();
         meshes["xmushroom"+i] = models.mushroom.mesh.clone();
         meshes["xrock"+i] = models.rock.mesh.clone();
@@ -374,6 +381,11 @@ function onResourcesLoaded(){
         random1 = xx[0];
         random2 = xx[1];
         meshes["xtree"+i].position.set(random1,0,random2);
+
+        var xx = randomRange(max,min,cluster);
+        random1 = xx[0];
+        random2 = xx[1];
+        meshes["xtree2"+i].position.set(random1,0,random2);
 
          var xx = randomRange(max,min,cluster);
         random1 = xx[0];
@@ -407,10 +419,16 @@ function onResourcesLoaded(){
         meshes["xtree"+i].castShadow = true;
         scene.add(meshes["xtree"+i]);
 
+        rand = Math.random()
+        meshes["xtree2"+i].scale.set(rand+0.6,rand+0.9,rand+0.6);
+        meshes["xtree2"+i].receiveShadow = true;
+        meshes["xtree2"+i].castShadow = true;
+        scene.add(meshes["xtree2"+i]);
+
          meshes["ytree"+i].scale.set(rand+0.6,rand+0.9,rand+0.6);
         meshes["ytree"+i].receiveShadow = true;
         meshes["ytree"+i].castShadow = true;
-        scene.add(meshes["ztree"+i]);
+        scene.add(meshes["ytree"+i]);
         
          meshes["ztree"+i].scale.set(rand+0.6,rand+0.9,rand+0.6);
         meshes["ztree"+i].receiveShadow = true;
