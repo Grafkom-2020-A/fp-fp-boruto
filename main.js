@@ -235,15 +235,15 @@ function init(){
   
     totalBody.position.set(0, 0, 0);
     totalBody.scale.set(0.01, 0.01, 0.01);
-    headBone.position.set(0, 10, 0);
+    headBone.position.set(0, 4, 0);
     headBone.scale.set(0.01, 0.01, 0.01);
-    leftArmBone.position.set(6, 6, 0);
+    leftArmBone.position.set(0, 0, 0);
     leftArmBone.scale.set(0.1, 0.1, 0.1);
-    rightArmBone.position.set(-6, 6, 0);
+    rightArmBone.position.set(-3, 3, 0);
     rightArmBone.scale.set(0.1, 0.1, 0.1);
-    leftLegBone.position.set(2, -6, 0);
+    leftLegBone.position.set(-3, 3, -5);
     leftLegBone.scale.set(0.1, 0.1, 0.1);
-    rightLegBone.position.set(-2, -6, 0);
+    rightLegBone.position.set(3, 3, -5);
     rightLegBone.scale.set(0.1, 0.1, 0.1);
   
     totalBody.add(headBone);
@@ -262,19 +262,19 @@ function init(){
   
     const skeleton = new THREE.Skeleton(bones);
   
-    const bodyGeometry = new THREE.BoxGeometry(8, 12, 4, 1, 1, 1);
-    const headGeometry = new THREE.BoxGeometry(8, 8, 8, 1, 1, 1);
-    const leftArmGeometry = new THREE.BoxGeometry(4, 12, 4, 1, 1, 1);
-    const rightArmGeometry = new THREE.BoxGeometry(4, 12, 4, 1, 1, 1);
-    const leftLegGeometry = new THREE.BoxGeometry(4, 12, 4, 1, 1, 1);
-    const rightLegGeometry = new THREE.BoxGeometry(4, 12, 4, 1, 1, 1);
+    const bodyGeometry = new THREE.BoxGeometry(5, 4, 10, 1, 1, 1);
+    const headGeometry = new THREE.BoxGeometry(1, 4, 1, 1, 1, 1);
+    const leftArmGeometry = new THREE.BoxGeometry(1.5, 4, 2, 1, 1, 1);
+    const rightArmGeometry = new THREE.BoxGeometry(1.5, 4, 2, 1, 1, 1);
+    const leftLegGeometry = new THREE.BoxGeometry(1.5, 4, 2, 1, 1, 1);
+    const rightLegGeometry = new THREE.BoxGeometry(1.5, 4, 2, 1, 1, 1);
   
-    headGeometry.translate(0, 10, 0);
+    headGeometry.translate(0, 0, 4);
     
-    leftArmGeometry.translate(6, 0, 0);
-    rightArmGeometry.translate(-6, 0, 0);
-    leftLegGeometry.translate(2, -12, 0);
-    rightLegGeometry.translate(-2, -12, 0);
+    leftArmGeometry.translate(-3.5, 0, 4);
+    rightArmGeometry.translate(3.5, 0, 4);
+    leftLegGeometry.translate(-3.5, 0, -4);
+    rightLegGeometry.translate(3.5, 0, -4);
   
     const humanGeometry = new THREE.Geometry();
     humanGeometry.merge(bodyGeometry);
