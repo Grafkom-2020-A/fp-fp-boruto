@@ -25,6 +25,12 @@ for(let i=1 ; i < 50 ; i++){
 for(let i=1 ; i < 50 ; i++){
     ANIMALS.push('fzebra'+i)
 }
+
+var PLANTFOOD = [];
+for(let i=1 ; i < 50 ; i++){
+    PLANTFOOD.push('xmushroom'+i)
+}
+
 var keyboard = {};
 var player = {
     x:0,
@@ -529,6 +535,12 @@ function onResourcesLoaded(){
     meshes["rock"].castShadow = true;
     scene.add(meshes["rock"]);
 
+    meshes["mushroom"] = models.mushroom.mesh.clone();
+    meshes["mushroom"].position.set(5,0,5);
+    meshes["mushroom"].scale.set(0.6,0.6,0.6);
+    meshes["mushroom"].castShadow = true;
+    scene.add(meshes["mushroom"]);
+
     meshes["stone"] = models.stone.mesh.clone();
     meshes["stone"].position.set(5,0,5);
     meshes["stone"].scale.set(0.6,0.6,0.6);
@@ -541,7 +553,7 @@ function onResourcesLoaded(){
     targetObject = new THREE.Object3D();
     scene.add(targetObject);
     var geometry = new THREE.CylinderGeometry( 0.05, 0.05, 2, 32 );
-    var material = new THREE.MeshBasicMaterial( {color: 0x964B00} );=
+    var material = new THREE.MeshBasicMaterial( {color: 0x964B00} );
     
     var geometry = new THREE.CylinderGeometry( 0.05, 0.05,3, 32 );
     var material = new THREE.MeshBasicMaterial( {color: 0x4d3700} );
@@ -559,6 +571,11 @@ ANIMALS.map((elem,index)=>{
 alive = {};
 ANIMALS.map((elem,index)=>{
     alive[elem] =1
+});
+
+flagp = {};
+PLANTFOOD.map((elem,index)=>{
+    flagp[elem] =1
 });
 
 console.log(ANIMALS)
@@ -716,6 +733,12 @@ food = {}
 ANIMALS.map((elem,index)=>{
     food[elem] =1
 })
+
+foodp = {}
+PLANTFOOD.map((elem,index)=>{
+    foodp[elem] =1
+})
+
 var enemyhit = 0
 var update = () => {
     // bindd(camera,flameLight,[0,2,0])
@@ -803,7 +826,7 @@ var update = () => {
 
     ANIMALS.map((elem,index)=>{
 
-        if(alive[elem] === 0  && checkCollision(player1,meshes[elem],1.8) && food[elem]){
+        if(checkCollision(player1,meshes[elem],1.8) && food[elem]){
             document.getElementById('info5').innerHTML = "Press E to harvest food";
             if(keyboard[69]){
                 enemyhit += 1
@@ -811,12 +834,28 @@ var update = () => {
                 food[elem] = 0
                 scene.remove(meshes[elem])
             }
-        } else if(alive[elem] === 0  && checkCollision(player1,meshes[elem],1.8) && !food[elem]){
+        } else if(checkCollision(player1,meshes[elem],1.8) && !food[elem]){
             document.getElementById('info5').innerHTML = ""
     
         }
         if(alive[elem]===1)
             randomMovement(meshes[elem],elem,meshes[elem].position.z,0.12)
+    });
+
+    PLANTFOOD.map((elem,index)=>{
+
+        if(checkCollision(player1,meshes[elem],1.8) && foodp[elem]){
+            document.getElementById('info5').innerHTML = "Press E to harvest food";
+            if(keyboard[69]){
+                enemyhit += 1
+                document.getElementById('info4').innerHTML = "Food: "+ enemyhit;
+                foodp[elem] = 0
+                scene.remove(meshes[elem])
+            }
+        } else if(checkCollision(player1,meshes[elem],1.8) && !foodp[elem]){
+            document.getElementById('info5').innerHTML = ""
+    
+        }
     });
 
     if(Math.floor(player1.position.x) < 4 && Math.floor(player1.position.x) > 0 &&
