@@ -770,40 +770,40 @@ var update = () => {
         }
     }
 
-    if(checkCollision(player1,meshes['rock'],1.8)){
-        if(binded['rock'] !== 1)
-            document.getElementById('info2').innerHTML =  "Press E to pick item";
-        else
-        document.getElementById('info2').innerHTML =  "";
-        if(keyboard[69]){
-            binded['rock'] = 1
-        }
-    } else {
-        document.getElementById('info2').innerHTML =  ""
-    }
-    if(binded['rock'] === 1){
+    // if(checkCollision(player1,meshes['rock'],1.8)){
+    //     if(binded['rock'] !== 1)
+    //         document.getElementById('info2').innerHTML =  "Press E to pick item";
+    //     else
+    //     document.getElementById('info2').innerHTML =  "";
+    //     if(keyboard[69]){
+    //         binded['rock'] = 1
+    //     }
+    // } else {
+    //     document.getElementById('info2').innerHTML =  ""
+    // }
+    // if(binded['rock'] === 1){
 
-        bindd(player1,meshes['rock'],[0,0,3]);
-        document.getElementById('info3').innerHTML = "Press T to drop item"
-    } else{
-        fall(meshes['rock'],GRAVITY1)
-    }
-    fall(meshes["rock"],GRAVITY1)
-    if(keyboard[84]){
-        binded['rock'] = 0;
-        document.getElementById('info3').innerHTML = ""
-    }
-    if(keyboard[82] && binded['rock'] === 1){
-        binded['rock'] = 0;
-        throwing['rock'] = 1;
-        meshes['rock'].position.y += 0.5
-    }
-    if(throwing['rock']===1){
-        throwera(meshes['rock'],power+0.8);
-        if(meshes['rock'].position.y < 0.1){
-            throwing['rock'] = 0
-        }
-    }
+    //     bindd(player1,meshes['rock'],[0,0,3]);
+    //     document.getElementById('info3').innerHTML = "Press T to drop item"
+    // } else{
+    //     fall(meshes['rock'],GRAVITY1)
+    // }
+    // fall(meshes["rock"],GRAVITY1)
+    // if(keyboard[84]){
+    //     binded['rock'] = 0;
+    //     document.getElementById('info3').innerHTML = ""
+    // }
+    // if(keyboard[82] && binded['rock'] === 1){
+    //     binded['rock'] = 0;
+    //     throwing['rock'] = 1;
+    //     meshes['rock'].position.y += 0.5
+    // }
+    // if(throwing['rock']===1){
+    //     throwera(meshes['rock'],power+0.8);
+    //     if(meshes['rock'].position.y < 0.1){
+    //         throwing['rock'] = 0
+    //     }
+    // }
 
     ANIMALS.map((elem,index)=>{
 
