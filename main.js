@@ -71,8 +71,8 @@ var models = {
     }, 
 
     tree4: {
-        obj:"models/ModularTerrainHilly/Prop_Tree_Pine_3.obj",
-        mtl:"models/ModularTerrainHilly/Prop_Tree_Pine_3.mtl",
+        obj:"models/tree/tree.obj",
+        mtl:"models/tree/tree.mtl",
         mesh:null
     }, 
    
