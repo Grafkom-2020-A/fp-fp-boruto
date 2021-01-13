@@ -27,7 +27,7 @@ for(let i=1 ; i < 50 ; i++){
 }
 
 var PLANTFOOD = [];
-for(let i=1 ; i < 50 ; i++){
+for(let i=1 ; i < 750 ; i++){
     PLANTFOOD.push('xmushroom'+i)
 }
 
