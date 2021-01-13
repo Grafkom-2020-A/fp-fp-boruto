@@ -835,16 +835,25 @@ var update = () => {
     // camera.rotation.y += 0.1
   
     //sun
-if(light.position.y < 0){
+    daytime += 1 * timeSpeedNorm/2;
+    light.position.x = Math.sin(daytime * 0.7 ) * 80;
+    light.position.y = Math.cos(daytime * 0.5 ) * 100;
+    light.position.z = Math.cos(daytime * 0.3 ) * 80;
+
+    if(light.position.y < 0){
        
     }
     if(daytime >= 3.13 && daytime < 10.26){
+        lightColor = 0xea6f1c;
         light.castShadow = false
         if(daytime >= 3.13 && daytime < 10.36){
-            
-             scene.fog = new THREE.FogExp2( 0xea6f1c,0.015 - (daytime/3.13 - 1)/100);
-             
-             scene.fog = new THREE.FogExp2( 0x111624,(daytime/3.13 - 1)/20);
+            if(daytime < 3.5){ 
+                scene.fog = new THREE.FogExp2( 0x111624,0.025);
+                console.log((daytime/3.13 - 1)/20);
+            }
+            else{
+                scene.fog = new THREE.FogExp2( 0x111624,(daytime/3.13 - 1)/20);
+            }
              console.log((daytime/3.13 - 1)/20);
         }
        
@@ -856,7 +865,8 @@ if(light.position.y < 0){
         s0 = 1
         s1 = 0
     } 
-  else {
+    else {
+        lightColor = 0xffffff;
         s1 = 1
         if(s0 && s1){
             daytime = 0;
@@ -888,7 +898,7 @@ if(light.position.y < 0){
         else if(daytime >= 2.7 && daytime < 3.13){
              scene.fog = new THREE.FogExp2( 0xea6f1c,(daytime/2.7 - 1)/100);
              console.log( (daytime/2.7-1)/100);
-            }
+        }
             
             
 
@@ -896,7 +906,6 @@ if(light.position.y < 0){
         console.log("DayTime: "+daytime)
 
     }
-    
     
     if(moving === 1){
         var time = Date.now() * 0.01;
