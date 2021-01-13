@@ -541,7 +541,7 @@ function onResourcesLoaded(){
     targetObject = new THREE.Object3D();
     scene.add(targetObject);
     var geometry = new THREE.CylinderGeometry( 0.05, 0.05, 2, 32 );
-    var material = new THREE.MeshBasicMaterial( {color: 0x964B00} );=
+    var material = new THREE.MeshBasicMaterial( {color: 0x964B00} );
     
     var geometry = new THREE.CylinderGeometry( 0.05, 0.05,3, 32 );
     var material = new THREE.MeshBasicMaterial( {color: 0x4d3700} );
