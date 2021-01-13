@@ -420,7 +420,7 @@ function onResourcesLoaded(){
         scene.add(meshes["xtree"+i]);
 
         rand = Math.random()
-        meshes["xtree2"+i].scale.set(rand+0.3,rand+0.6,rand+0.3);
+        meshes["xtree2"+i].scale.set(rand-0.5,rand-0.5,rand-0.5);
         meshes["xtree2"+i].receiveShadow = true;
         meshes["xtree2"+i].castShadow = true;
         scene.add(meshes["xtree2"+i]);
