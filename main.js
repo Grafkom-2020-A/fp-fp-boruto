@@ -101,6 +101,11 @@ var models = {
         mtl:"models/ModularTerrainHilly/Prop_Rock_1.mtl",
         mesh:null
     },
+    stone: {
+        obj:"models/stone/stone.obj",
+        mtl:"models/stone/stone.mtl",
+        mesh:null
+    },
     mushroom: {
         obj:"models/ModularTerrainHilly/Prop_Mushroom_1.obj",
         mtl:"models/ModularTerrainHilly/Prop_Mushroom_1.mtl",
@@ -372,6 +377,7 @@ function onResourcesLoaded(){
         meshes["xbush"+i] = models.bush.mesh.clone();
         meshes["xmushroom"+i] = models.mushroom.mesh.clone();
         meshes["xrock"+i] = models.rock.mesh.clone();
+        meshes["xstone"+i] = models.stone.mesh.clone();
         max = 250;
         min = -250;
         cluster = 20;
@@ -413,6 +419,8 @@ function onResourcesLoaded(){
         // continue
         meshes["xrock"+i].position.set(random1,0,random2);
 
+        meshes["xstone"+i].position.set(random1,0,random2);
+
         rand = Math.random()
         meshes["xtree"+i].scale.set(rand+0.6,rand+0.9,rand+0.6);
         meshes["xtree"+i].receiveShadow = true;
@@ -449,6 +457,11 @@ function onResourcesLoaded(){
         meshes["xrock"+i].receiveShadow = true;
         meshes["xrock"+i].castShadow = true;
         scene.add(meshes["xrock"+i]);
+
+        meshes["xstone"+i].scale.set(rand+0.6,rand+0.9,rand+0.6);
+        meshes["xstone"+i].receiveShadow = true;
+        meshes["xstone"+i].castShadow = true;
+        scene.add(meshes["xstone"+i]);
     }
 
 
@@ -515,6 +528,12 @@ function onResourcesLoaded(){
     meshes["rock"].scale.set(0.6,0.6,0.6);
     meshes["rock"].castShadow = true;
     scene.add(meshes["rock"]);
+
+    meshes["stone"] = models.stone.mesh.clone();
+    meshes["stone"].position.set(5,0,5);
+    meshes["stone"].scale.set(0.6,0.6,0.6);
+    meshes["stone"].castShadow = true;
+    scene.add(meshes["stone"]);
    
     meshes["tent"] = models.tent.mesh.clone();
     scene.add(meshes["tent"]);
