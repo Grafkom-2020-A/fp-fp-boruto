@@ -837,13 +837,14 @@ var update = () => {
             if(keyboard[69]){
                 if(keyboard[69] && health[elem] != 0){
                     health[elem] -= 1;
+                    enemyhit += 1
                     HUNGRY -= 5;
                 }
                 else if(health[elem] == 0){
                     document.getElementById('info5').innerHTML = "Press E to harvest food";
-                    enemyhit += 1
-                    HUNGRY += 30
-                    if(HUNGRY > 100) HUNGRY = 100;
+                    // enemyhit += 1
+                    // HUNGRY += 30
+                    // if(HUNGRY > 100) HUNGRY = 100;
                     document.getElementById('info4').innerHTML = "Food: "+ enemyhit;
                     food[elem] = 0
                     scene.remove(meshes[elem])
@@ -863,6 +864,7 @@ var update = () => {
             document.getElementById('info5').innerHTML = "Press E to harvest food";
             if(keyboard[69]){
                 HUNGRY += 2;
+                if(HUNGRY > 100) HUNGRY = 100;
                 enemyhit += 1;
                 document.getElementById('info4').innerHTML = "Food: "+ enemyhit;
                 foodp[elem] = 0
