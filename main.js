@@ -2,7 +2,7 @@ var scene, camera, renderer;
 var clock;
 var meshFloor;
 var RDPERSON = 0;
-var HUNGRY = 90;
+var HUNGRY = 21;
 var GRAVITY = 0.1;
 var fogcase = true
 var s0 = 0;
@@ -640,7 +640,8 @@ var interract = (obj1,opt1)=>{
     if(keyboard[89]){//Y
         if(enemyhit>0){
             enemyhit -= 1;
-            HUNGRY += 10;
+            HUNGRY += 8;
+            PlayerScore += 10;
             if(HUNGRY > 100)
                 HUNGRY = 100;
             if(HUNGRY <= 0)
@@ -743,10 +744,13 @@ var enemyhit = 0
 var update = () => {
     // bindd(camera,flameLight,[0,2,0])
     if(HUNGRY <= 0){
-        document.getElementById('health').innerHTML = "GAMEOVER";
+        document.getElementById('health').innerHTML = "GAMEOVER " ;
+        document.getElementById('ingfo').innerHTML = "Score: " + PlayerScore ;
+        
     }
     else{
 
+    PlayerScore += 1;
     var gg = parseInt(document.getElementById('bar1').value)
     GRAVITY1 = (GRAVITY+gg/70)
     var gg = parseInt(document.getElementById('bar2').value)
@@ -771,6 +775,7 @@ var update = () => {
                     health[elem] -= 1;
                     enemyhit += 1
                     HUNGRY -= 5;
+                    PlayerScore += 2;
                 }
                 else if(health[elem] == 0){
                     document.getElementById('info5').innerHTML = "Press E to harvest food";
@@ -800,6 +805,7 @@ var update = () => {
                 enemyhit += 1;
                 document.getElementById('info4').innerHTML = "Food: "+ enemyhit;
                 foodp[elem] = 0
+                PlayerScore += 2;
                 scene.remove(meshes[elem])
             }
         } else if(checkCollision(player1,meshes[elem],1.8) && !foodp[elem]){
@@ -830,7 +836,7 @@ var update = () => {
             if(daytime < 5){ 
                 light.intensity = 0.5
                 scene.fog = new THREE.FogExp2( 0x877853,(daytime/3.13-1)/100);
-                console.log((daytime/3.13 - 1)/20);
+                // console.log((daytime/3.13 - 1)/20);
             }
             else{
                 light.intensity = 0.0
@@ -877,7 +883,7 @@ var update = () => {
         }   
 
         flameLight.castShadow = false
-        console.log("DayTime: "+daytime)
+        // console.log("DayTime: "+daytime)
 
     }
     
@@ -893,8 +899,13 @@ var update = () => {
     }
     moving = 0;
     }
+
+    
+    // console.log(PlayerScore);
+
 };
 var daytime = 0;
+var PlayerScore=0;
 
 function animate( ){
     if(RESOURCES_LOADED === false){
@@ -902,7 +913,8 @@ function animate( ){
         renderer.render( loadingScreen.scene , loadingScreen.camera );
         return;
     }
-    update( );
+
+        update();
 
     requestAnimationFrame( animate );
     renderer.render( scene , camera );
@@ -915,6 +927,10 @@ function keyDown( event ){
 function keyUp( event ){
     keyboard[ event.keyCode ] = false;
 }
+
+
+
+
 
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
