@@ -754,7 +754,7 @@ var update = () => {
     var gg = parseInt(document.getElementById('bar3').value)
     timeSpeedNorm = (timeSpeed+gg/500),
     HUNGRY -= 0.01
-    document.getElementById('health').innerHTML =  "hungry: "+100+"/"+Math.floor(HUNGRY);
+    document.getElementById('health').innerHTML =  "hungry: "+Math.floor(HUNGRY)+"/"+100;
     interract(camera,0)
     bindd(camera,player1,[0,-1,0])
     
@@ -843,6 +843,7 @@ var update = () => {
                     document.getElementById('info5').innerHTML = "Press E to harvest food";
                     enemyhit += 1
                     HUNGRY += 30
+                    if(HUNGRY > 100) HUNGRY = 100;
                     document.getElementById('info4').innerHTML = "Food: "+ enemyhit;
                     food[elem] = 0
                     scene.remove(meshes[elem])
@@ -960,6 +961,7 @@ var update = () => {
     }
 };
 var daytime = 0;
+
 function animate( ){
     if(RESOURCES_LOADED === false){
         requestAnimationFrame( animate );
