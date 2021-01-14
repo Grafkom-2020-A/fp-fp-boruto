@@ -307,12 +307,12 @@ function init(){
     player1.position.set(0,2,0)
     var geometry = new THREE.CubeGeometry(1200,1200,1200);
     var cubeMaterials = [
-        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("new_skybox/xplus.jpg"), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("new_skybox/xmin.jpg"), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("new_skybox/yplus.jpg"), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("new_skybox/ymin.jpg"), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("new_skybox/zplus.jpg"), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("new_skybox/zmin.jpg"), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("skybox/bluecloud_lf.jpg"), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("skybox/bluecloud_rt.jpg"), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("skybox/bluecloud_up.jpg"), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("skybox/bluecloud_dn.jpg"), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("skybox/bluecloud_ft.jpg"), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader( ).load("skybox/bluecloud_bk.jpg"), side: THREE.DoubleSide }),
     ];
 
     var cubeMaterial = new THREE.MeshFaceMaterial ( cubeMaterials );
