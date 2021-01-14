@@ -697,6 +697,10 @@ var interract = (obj1,opt1)=>{
             obj1.updateProjectionMatrix();
         }
     }
+    if(keyboard[82]) // R for reset
+    {
+        location.reload();
+    }
 
 }
 var bindd = (obj1,obj2,margin)=>{
