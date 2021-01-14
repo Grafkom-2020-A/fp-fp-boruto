@@ -743,7 +743,7 @@ var enemyhit = 0
 var update = () => {
     // bindd(camera,flameLight,[0,2,0])
     if(HUNGRY <= 0){
-        
+        document.getElementById('health').innerHTML = "GAMEOVER";
     }
     else{
 
@@ -760,74 +760,6 @@ var update = () => {
     
     posVal = Math.round(player1.position.x) + " " + Math.round(player1.position.y) + " " + Math.round(player1.position.z);
     document.getElementById('info').innerHTML =  "position: "+posVal;
-    // if(checkCollision(player1,jarid,1.8)){
-    //     if(binded['jarid'] !== 1)
-    //         document.getElementById('info2').innerHTML =  "Press E to pick item";
-    //     else
-    //     document.getElementById('info2').innerHTML =  "";
-    //     if(keyboard[69]){
-    //         binded['jarid'] = 1
-    //     }
-    // } else {
-    //     document.getElementById('info2').innerHTML =  ""
-    // }
-    // if(binded['jarid'] === 1){
-
-    //     bindz(player1,jarid,[0,0,0]);
-    //     document.getElementById('info3').innerHTML = "Press T to drop item"
-    // } else{
-    //     fall(jarid,GRAVITY1)
-    // }
-    // if(keyboard[84]){
-    //     binded['jarid'] = 0;
-    //     document.getElementById('info3').innerHTML = ""
-    // }
-    // if(keyboard[82] && binded['jarid'] === 1){
-    //     binded['jarid'] = 0;
-    //     throwing['jarid'] = 1;
-    //     jarid.position.y += 0.5
-    // }
-    // if(throwing['jarid']===1){
-    //     thrower(jarid,power);
-    //     if(jarid.position.y < 0.1){
-    //         throwing['jarid'] = 0
-    //     }
-    // }
-
-    // if(checkCollision(player1,meshes['rock'],1.8)){
-    //     if(binded['rock'] !== 1)
-    //         document.getElementById('info2').innerHTML =  "Press E to pick item";
-    //     else
-    //     document.getElementById('info2').innerHTML =  "";
-    //     if(keyboard[69]){
-    //         binded['rock'] = 1
-    //     }
-    // } else {
-    //     document.getElementById('info2').innerHTML =  ""
-    // }
-    // if(binded['rock'] === 1){
-
-    //     bindd(player1,meshes['rock'],[0,0,3]);
-    //     document.getElementById('info3').innerHTML = "Press T to drop item"
-    // } else{
-    //     fall(meshes['rock'],GRAVITY1)
-    // }
-    // fall(meshes["rock"],GRAVITY1)
-    // if(keyboard[84]){
-    //     binded['rock'] = 0;
-    //     document.getElementById('info3').innerHTML = ""
-    // }
-    // if(keyboard[82] && binded['rock'] === 1){
-    //     binded['rock'] = 0;
-    //     throwing['rock'] = 1;
-    //     meshes['rock'].position.y += 0.5
-    // }
-    // if(throwing['rock']===1){
-    //     throwera(meshes['rock'],power+0.8);
-    //     if(meshes['rock'].position.y < 0.1){
-    //         throwing['rock'] = 0
-    //     }
-    // }
 
     ANIMALS.map((elem,index)=>{
 
