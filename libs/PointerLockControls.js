@@ -43,9 +43,9 @@ THREE.PointerLockControls = function ( camera, domElement ) {
 
 		euler.x = Math.max( - PI_2, Math.min( PI_2, euler.x ) );
 		// console.log(euler.x);
-		if(euler.x <=-0.5)
+		if(euler.x <=-0.31)
 		{
-			euler.x =-0.6;
+			euler.x =-0.3;
 		}
 		camera.quaternion.setFromEuler( euler );
 
