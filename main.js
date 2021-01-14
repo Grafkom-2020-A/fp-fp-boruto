@@ -35,7 +35,7 @@ var keyboard = {};
 var player = {
     x:0,
     z:-5,
-    height:0.1,
+    height:0.75,
     speed:0.2,
     throwspeed:0.7,
     turnSpeed:Math.PI*0.003 
@@ -434,7 +434,7 @@ function onResourcesLoaded(){
         scene.add(meshes["xtree"+i]);
 
         rand = Math.random()
-        meshes["xtree2"+i].scale.set(rand-0.5,rand-0.5,rand-0.5);
+        meshes["xtree2"+i].scale.set(rand-0.9,rand-0.9,rand-0.9);
         meshes["xtree2"+i].receiveShadow = true;
         meshes["xtree2"+i].castShadow = true;
         scene.add(meshes["xtree2"+i]);
@@ -894,8 +894,8 @@ var update = () => {
         bones[1].rotation.y = (Math.PI * angle) / 8;
         bones[2].rotation.x = (Math.PI * angle) / 4;
         bones[3].rotation.x = -(Math.PI * angle) / 4;
-        bones[4].rotation.x = -(Math.PI * angle) / 4;
-        bones[5].rotation.x = (Math.PI * angle) / 4;
+        bones[4].rotation.x = (Math.PI * angle) / 4;
+        bones[5].rotation.x = -(Math.PI * angle) / 4;
     }
     moving = 0;
     }
