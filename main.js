@@ -641,7 +641,7 @@ var interract = (obj1,opt1)=>{
         if(enemyhit>0){
             enemyhit -= 1;
             HUNGRY += 8;
-            PlayerScore += 10;
+            PlayerScore += 5;
             if(HUNGRY > 100)
                 HUNGRY = 100;
             if(HUNGRY <= 0)
@@ -654,7 +654,7 @@ var interract = (obj1,opt1)=>{
     if(keyboard[80]){//P
         daytime += 1
     }
-    if(keyboard[70]){//P
+    if(keyboard[70]){//F
         fogcase = !fogcase
     }
     if(keyboard[87]){//W
@@ -754,14 +754,38 @@ var update = () => {
     }
     else{
 
-    PlayerScore += 1;
+    if(PlayerScore/100 <= 2)
+    {
+        PlayerScore += 1;
+        HUNGRY -= 0.01;
+    }
+    else if (PlayerScore/100 <=5)
+    {
+        PlayerScore += 2;
+        HUNGRY -= 0.03;
+    }
+    else if (PlayerScore/100 <=7)
+    {
+        PlayerScore += 3;
+        HUNGRY -= 0.05;
+    }
+    else if (PlayerScore/100 <=9)
+    {
+        PlayerScore += 4;
+        HUNGRY -= 0.07;
+    }
+    else
+    {
+        PlayerScore += 5;
+        HUNGRY -= 0.1;
+    }
     var gg = parseInt(document.getElementById('bar1').value)
     GRAVITY1 = (GRAVITY+gg/70)
     var gg = parseInt(document.getElementById('bar2').value)
     power = (player.throwspeed+gg/5)
     var gg = parseInt(document.getElementById('bar3').value)
-    timeSpeedNorm = (timeSpeed+gg/500),
-    HUNGRY -= 0.01
+    timeSpeedNorm = (timeSpeed+gg/500)
+    
     document.getElementById('health').innerHTML =  "hungry: "+Math.floor(HUNGRY)+"/"+100;
     interract(camera,0)
     bindd(camera,player1,[0,-1,0])
@@ -891,7 +915,7 @@ var update = () => {
 
     }
     
-    if(moving === 1){
+    if(moving != 0){
         var time = Date.now() * 0.01;
         const angle = Math.sin(time);
         const bones = player1.skeleton.bones;
