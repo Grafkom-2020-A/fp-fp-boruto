@@ -171,7 +171,7 @@ var meshes = { };
 function init(){
 
     scene = new THREE.Scene( );
-    camera = new THREE.PerspectiveCamera(90, window.innerWidth/window.innerHeight, 0.05, 1000);
+    camera = new THREE.PerspectiveCamera(90, window.innerWidth/window.innerHeight, 0.01, 1000);
     var listener = new THREE.AudioListener();
     camera.add( listener );
     camera.rotation.order = "YXZ";
@@ -340,7 +340,7 @@ function init(){
             })
         })(_key);
     }
-    camera.position.set(player.x,player.height+0.1,player.z);
+    camera.position.set(player.x,player.height+0.1,player.z-0.5);
     camera.lookAt(new THREE.Vector3(0, player.height, 0));
   
     renderer = new THREE.WebGLRenderer();

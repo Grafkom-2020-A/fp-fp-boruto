@@ -226,7 +226,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 		}
 
-		var verticalLookRatio = 1;
+		var verticalLookRatio = 0.5;
 
 		if ( this.constrainVertical ) {
 
