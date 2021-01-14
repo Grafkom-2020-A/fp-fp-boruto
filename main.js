@@ -470,8 +470,6 @@ function onResourcesLoaded(){
         scene.add(meshes["xstone"+i]);
     }
 
-
-
     for(let i = 1; i < 50 ; i++){
 
         max = 250;
@@ -730,8 +728,10 @@ var throwera = (obj1,power)=>{
 binded = {}
 throwing = {}
 food = {}
+health = {};
 ANIMALS.map((elem,index)=>{
     food[elem] =1
+    health[elem] =3
 })
 
 foodp = {}
@@ -742,6 +742,11 @@ PLANTFOOD.map((elem,index)=>{
 var enemyhit = 0
 var update = () => {
     // bindd(camera,flameLight,[0,2,0])
+    if(HUNGRY <= 0){
+        
+    }
+    else{
+
     var gg = parseInt(document.getElementById('bar1').value)
     GRAVITY1 = (GRAVITY+gg/70)
     var gg = parseInt(document.getElementById('bar2').value)
@@ -827,12 +832,21 @@ var update = () => {
     ANIMALS.map((elem,index)=>{
 
         if(checkCollision(player1,meshes[elem],1.8) && food[elem]){
-            document.getElementById('info5').innerHTML = "Press E to harvest food";
+            
+            document.getElementById('info5').innerHTML = "Press E to Attack";
             if(keyboard[69]){
-                enemyhit += 1
-                document.getElementById('info4').innerHTML = "Food: "+ enemyhit;
-                food[elem] = 0
-                scene.remove(meshes[elem])
+                if(keyboard[69] && health[elem] != 0){
+                    health[elem] -= 1;
+                    HUNGRY -= 5;
+                }
+                else if(health[elem] == 0){
+                    document.getElementById('info5').innerHTML = "Press E to harvest food";
+                    enemyhit += 1
+                    HUNGRY += 30
+                    document.getElementById('info4').innerHTML = "Food: "+ enemyhit;
+                    food[elem] = 0
+                    scene.remove(meshes[elem])
+                }
             }
         } else if(checkCollision(player1,meshes[elem],1.8) && !food[elem]){
             document.getElementById('info5').innerHTML = ""
@@ -847,28 +861,20 @@ var update = () => {
         if(checkCollision(player1,meshes[elem],1.8) && foodp[elem]){
             document.getElementById('info5').innerHTML = "Press E to harvest food";
             if(keyboard[69]){
-                enemyhit += 1
+                HUNGRY += 2;
+                enemyhit += 1;
                 document.getElementById('info4').innerHTML = "Food: "+ enemyhit;
                 foodp[elem] = 0
                 scene.remove(meshes[elem])
             }
         } else if(checkCollision(player1,meshes[elem],1.8) && !foodp[elem]){
-            document.getElementById('info5').innerHTML = ""
+            document.getElementById('info5').innerHTML = "";
     
         }
     });
 
-    if(Math.floor(player1.position.x) < 4 && Math.floor(player1.position.x) > 0 &&
-        Math.floor(player1.position.z) < -9 && Math.floor(player1.position.z) > -13)
-    {
-        document.getElementById('info6').innerHTML = "Press E to enter house";
-        if(keyboard[69]){
-            camera.position.set(0, -30+player.height, 10);
-        }
-    }
-    else{
-        document.getElementById('info6').innerHTML = "";
-    }
+    document.getElementById('info6').innerHTML = "";
+
 
     // jarid.rotation.z += 0.1
     // camera.rotation.y += 0.1
@@ -882,24 +888,24 @@ var update = () => {
     if(light.position.y < 0){
        
     }
-    if(daytime >= 3.13 && daytime < 10.26){
+  if(daytime >= 3.13 && daytime < 10.26){
         lightColor = 0xea6f1c;
         light.castShadow = false
         if(daytime >= 3.13 && daytime < 10.36){
-            if(daytime < 3.5){ 
-                scene.fog = new THREE.FogExp2( 0x111624,0.025);
+            if(daytime < 5){ 
+                light.intensity = 0.5
+                scene.fog = new THREE.FogExp2( 0x877853,(daytime/3.13-1)/100);
                 console.log((daytime/3.13 - 1)/20);
             }
             else{
-                scene.fog = new THREE.FogExp2( 0x111624,(daytime/3.13 - 1)/20);
+                light.intensity = 0.0
+                scene.fog = new THREE.FogExp2( 0x111624,(daytime/4.5 - 1)/10);
             }
-             console.log((daytime/3.13 - 1)/20);
         }
        
         flameLight.intensity = 2.0
         flameLight.castShadow = true
 
-        light.intensity = 0.0
         console.log("nightTime: "+daytime)
         s0 = 1
         s1 = 0
@@ -917,14 +923,14 @@ var update = () => {
         if(daytime >= 0 && daytime < 1.5){
             light.intensity = 0;
             if((10.25/3.13 -1)/20 - daytime/10 > 0.02){
-                console.log((10.25/3.13 -1)/20 - daytime/10);
+                // console.log((10.25/3.13 -1)/20 - daytime/10);
                 scene.fog = new THREE.FogExp2( 0x111624, (10.25/3.13 -1)/20 - daytime/10);
             }
             else{
-                 scene.fog = new THREE.FogExp2( 0xbae5ff , (daytime/2 - 0.53) * 0.183);
+                 scene.fog = new THREE.FogExp2( 0xbae5ff , (daytime - 0.53) * 0.183);
                  light.intensity = (daytime/2-0.5)*3 - 0.4;
-                console.log("Light = "+light.intensity);
-                console.log("FOG = ",daytime/2 - 0.53);
+                // console.log("Light = "+light.intensity);
+                // console.log("FOG = ",daytime/2 - 0.53);
              }
         }
         else if(daytime >= 1.5 && daytime < 2.7){
@@ -933,13 +939,7 @@ var update = () => {
             else
                 scene.fog = new THREE.FogExp2( 0xbae5ff, 0);
                 
-        }
-        else if(daytime >= 2.7 && daytime < 3.13){
-             scene.fog = new THREE.FogExp2( 0xea6f1c,(daytime/2.7 - 1)/100);
-             console.log( (daytime/2.7-1)/100);
-        }
-            
-            
+        }   
 
         flameLight.castShadow = false
         console.log("DayTime: "+daytime)
@@ -957,7 +957,7 @@ var update = () => {
         bones[5].rotation.x = (Math.PI * angle) / 4;
     }
     moving = 0;
-
+    }
 };
 var daytime = 0;
 function animate( ){
